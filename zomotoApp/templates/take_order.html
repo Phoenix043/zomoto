@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Place an Order</h2>
+<form method="post" action="{% url 'take_order' %}">
+  {% csrf_token %}
+  <label for="customer_name">Your Name:</label>
+  <input type="text" name="customer_name" required><br>
+  
+  <h3>Select Dishes:</h3>
+  <ul>
+    {% for dish in dishes %}
+      <li>
+        <input type="checkbox" name="dish" value="{{ dish.id }}">
+        {{ dish.dish_name }} - ${{ dish.price }}
+      </li>
+    {% endfor %}
+  </ul>
+  
+  <button type="submit">Place Order</button>
+</form>
+{% endblock %}

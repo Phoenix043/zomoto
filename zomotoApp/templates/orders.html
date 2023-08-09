@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Orders</h2>
+
+<ul>
+  {% for order in orders %}
+    <li>
+      Order ID: {{ order.id }}<br>
+      Customer: {{ order.customer_name }}<br>
+      Status: {{ order.get_status_display }}<br>
+      Dishes:
+      <ul>
+        {% for orderdish in order.orderdish_set.all %}
+          <li>{{ orderdish.dish.dish_name }} (Quantity: {{ orderdish.quantity }})</li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
